@@ -1,0 +1,12 @@
+{
+  "name": "pet-adopt-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "宠物领养系统工作区入口：前端在 pet-adopt-frontend，后端在 pet-adopt-backend",
+  "scripts": {
+    "install:fe": "npm --prefix pet-adopt-frontend install",
+    "dev": "npm --prefix pet-adopt-frontend run dev",
+    "build": "npm --prefix pet-adopt-frontend run build",
+    "preview": "npm --prefix pet-adopt-frontend run preview"
+  }
+}

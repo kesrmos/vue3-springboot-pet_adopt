@@ -1,0 +1,64 @@
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
+  error:
+    # 不向前端暴露堆栈、异常类名等内部信息
+    include-stacktrace: never
+    include-message: never
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: pet-adopt-backend
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 可用环境变量覆盖：DB_URL / DB_USERNAME / DB_PASSWORD
+    url: "${DB_URL:jdbc:mysql://127.0.0.1:3306/pet_adopt?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true}"
+    username: "${DB_USERNAME:root}"
+    # 本机 MySQL 为 root / 空密码；设置了密码就改这里或配置环境变量 DB_PASSWORD
+    password: "${DB_PASSWORD:}"
+    hikari:
+      pool-name: PetAdoptHikariPool
+      minimum-idle: 2
+      maximum-pool-size: 10
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+  jackson:
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.example.petadopt.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    # 开发阶段打印 SQL，上线可注释
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      table-underline: true
+
+# JWT 配置（生产环境请通过环境变量 JWT_SECRET 覆盖）
+jwt:
+  # HS256 要求密钥长度 >= 32 字节
+  secret: "${JWT_SECRET:pet-adopt-jwt-secret-key-please-change-2024}"
+  # token 有效期：24 小时（毫秒）
+  expire: ${JWT_EXPIRE:86400000}
+
+logging:
+  level:
+    com.example.petadopt: debug

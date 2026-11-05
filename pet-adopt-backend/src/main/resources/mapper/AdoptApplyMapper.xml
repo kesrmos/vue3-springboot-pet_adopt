@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.petadopt.mapper.AdoptApplyMapper">
+
+    <!-- 领养申请通用查询字段 -->
+    <sql id="applyColumns">
+        a.id,
+        a.user_id,
+        a.pet_id,
+        a.live_env,
+        a.`exp`,
+        a.remark,
+        a.audit_status,
+        a.audit_remark,
+        a.create_time,
+        p.name   AS pet_name,
+        p.type   AS pet_type,
+        p.gender AS pet_gender,
+        p.age    AS pet_age,
+        p.photo  AS pet_photo,
+        p.status AS pet_status,
+        u.name    AS user_name,
+        u.phone   AS user_phone,
+        u.address AS user_address
+    </sql>
+
+    <!-- 管理员：全部申请分页 -->
+    <select id="selectApplyPage" resultType="com.example.petadopt.vo.ApplyVO">
+        SELECT
+        <include refid="applyColumns"/>
+        FROM adopt_apply a
+        LEFT JOIN pet p ON p.id = a.pet_id
+        LEFT JOIN `user` u ON u.id = a.user_id
+        <where>
+            <if test="auditStatus != null">
+                AND a.audit_status = #{auditStatus}
+            </if>
+        </where>
+        ORDER BY a.create_time DESC, a.id DESC
+    </select>
+
+    <!-- 前台：我的申请列表 -->
+    <select id="selectMyApply" resultType="com.example.petadopt.vo.ApplyVO">
+        SELECT
+        <include refid="applyColumns"/>
+        FROM adopt_apply a
+        LEFT JOIN pet p ON p.id = a.pet_id
+        LEFT JOIN `user` u ON u.id = a.user_id
+        WHERE a.user_id = #{userId}
+        ORDER BY a.create_time DESC, a.id DESC
+    </select>
+
+</mapper>
