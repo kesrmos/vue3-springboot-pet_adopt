@@ -18,22 +18,22 @@
 ### 前端 pet-adopt-frontend
 - Vue 3 + Vite
 - Element Plus
-- Pinia（状态管理）
+- Pinia
 - Vue Router
-- Axios（网络请求）
+- Axios
 
 ### 后端 pet-adopt-backend
 - SpringBoot 3
 - MyBatis-Plus
 - MySQL 8.0
-- Knife4j（接口文档）
+- Knife4j
 - Maven
 
 ## 📂 目录结构
 ue3-springboot-pet_adopt/
 ├── pet-adopt-frontend    # Vue3 前端项目
 ├── pet-adopt-backend     # SpringBoot 后端项目
-├── _stray-node-root      # 临时目录（可忽略）
+├── _stray-node-root      # 临时目录
 └── package.json
 
 ## 📋 环境要求
