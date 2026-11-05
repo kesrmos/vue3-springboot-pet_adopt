@@ -30,11 +30,11 @@
 - Maven
 
 ## 📂 目录结构
-ue3-springboot-pet_adopt/
-├── pet-adopt-frontend    # Vue3 前端项目
-├── pet-adopt-backend     # SpringBoot 后端项目
-├── _stray-node-root      # 临时目录
-└── package.json
+- ue3-springboot-pet_adopt/
+- ├── pet-adopt-frontend    # Vue3 前端项目
+- ├── pet-adopt-backend     # SpringBoot 后端项目
+- ├── _stray-node-root      # 临时目录
+- └── package.json
 
 ## 📋 环境要求
 - Node.js >= 18
