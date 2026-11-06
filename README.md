@@ -52,7 +52,7 @@ mvn spring-boot:run
 
 ### 启动前端
 ```bash
-cd d:\devcProgram\VSCode_Pro\pet_adopt\pet-adopt-frontend
+cd pet-adopt-frontend
 npm install
 npm run dev
 ```
